@@ -1,122 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import styles from './app.module.css';
+import data from './data.json';
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+	// Можно задать 2 состояния — steps и activeIndex
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+	// И определить 3 обработчика: Клик назад, Клик вперед, Начать сначала
 
-      <div className="ticks"></div>
+	// И 2 переменных-флага — находимся ли мы на первом шаге, и находимся ли на последнем
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
-
-export default App
+	return (
+		<div className={styles.container}>
+			<div className={styles.card}>
+				<h1>Инструкция по готовке пельменей</h1>
+				<div className={styles.steps}>
+					<div className={styles['steps-content']}>
+						{/* Для получения активного контента использйте steps и activeIndex */}
+						Контент соответственный шагу. Сейчас активен шаг 3
+					</div>
+					<ul className={styles['steps-list']}>
+						{/* Выводите <li> с помощью массива steps и метода map(), подставляя в разметку нужные значения и классы */}
+						<li className={styles['steps-item'] + ' ' + styles.done}>
+							{/* Для того, чтобы вычислить необходимый класс используйте активный индекс, текущий индекс, а также тернарные операторы */}
+							<button className={styles['steps-item-button']}>1</button>
+							{/* При клике на кнопку установка выбранного шага в качестве активного */}
+							Шаг 1
+						</li>
+						<li className={styles['steps-item'] + ' ' + styles.done}>
+							<button className={styles['steps-item-button']}>2</button>
+							Шаг 2
+						</li>
+						<li
+							className={
+								styles['steps-item'] +
+								' ' +
+								styles.done +
+								' ' +
+								styles.active
+							}
+						>
+							<button className={styles['steps-item-button']}>3</button>
+							Шаг 3
+						</li>
+						<li className={styles['steps-item']}>
+							<button className={styles['steps-item-button']}>4</button>
+							Шаг 4
+						</li>
+					</ul>
+					<div className={styles['buttons-container']}>
+						<button className={styles.button}>Назад</button>
+						<button className={styles.button}>
+							Далее
+							{/* "Начать сначала", можно сделать этой же кнопкой, просто подменять обработчик и текст в зависимости от условия */}
+							{/* Или заменять всю кнопку в зависимости от условия */}
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
